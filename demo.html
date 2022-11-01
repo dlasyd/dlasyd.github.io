@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo of concept</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .parallax-background {
+            height: 100vh;
+            width: 100vw;
+            background-image: url("img/castle5.png");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .parallax-background h1 {
+            color: white;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        /*
+            regions on the screen
+            1 2 3
+            4 5 6
+            7 8 9
+         */
+        $(document).ready(function () {
+            let $parallax = $(".parallax-background");
+            let height = $parallax.height();
+            let width = $parallax.width();
+            let region = 5
+            $("h1").text(`${region}`)
+
+            $(window).on('resize', function () {
+                height = $parallax.height();
+                width = $parallax.width();
+                // update region here
+                $("h1").text(`${region}`)
+            });
+            $parallax.mousemove(function (event) {
+                let horizontalRegion = Math.ceil(event.pageX / width * 3)
+                let verticalRegion = Math.ceil(event.pageY / height * 3)
+                region = horizontalRegion + (3 * (verticalRegion - 1))
+                $("h1").text(`${region}`)
+                $parallax.css("background-image", `url("img/castle${region}.png")`);
+            })
+        });
+
+    </script>
+</head>
+<body>
+<div class="parallax-background">
+    <h1>mouse position</h1>
+</div>
+</body>
+</html>
