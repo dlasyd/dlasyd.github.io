@@ -35,6 +35,24 @@
             7 8 9
          */
         $(document).ready(function () {
+            const images = []
+            function preload() {
+                for (i = 0; i < preload.arguments.length; i++) {
+                    images[i] = new Image()
+                    images[i].src = preload.arguments[i]
+                }
+            }
+            preload(
+                "img/castle1.png",
+                "img/castle2.png",
+                "img/castle3.png",
+                "img/castle4.png",
+                "img/castle5.png",
+                "img/castle6.png",
+                "img/castle7.png",
+                "img/castle8.png",
+                "img/castle9.png",
+            )
             let $parallax = $(".parallax-background");
             let height = $parallax.height();
             let width = $parallax.width();
