@@ -12,7 +12,7 @@
         .parallax-background {
             height: 100vh;
             width: 100vw;
-            background-image: url("img/castle5.png");
+            background-image: url("img5/castle13.png");
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
@@ -43,20 +43,36 @@
                 }
             }
             preload(
-                "img/castle1.png",
-                "img/castle2.png",
-                "img/castle3.png",
-                "img/castle4.png",
-                "img/castle5.png",
-                "img/castle6.png",
-                "img/castle7.png",
-                "img/castle8.png",
-                "img/castle9.png",
+                "img5/castle1.png",
+                "img5/castle2.png",
+                "img5/castle3.png",
+                "img5/castle4.png",
+                "img5/castle5.png",
+                "img5/castle6.png",
+                "img5/castle7.png",
+                "img5/castle8.png",
+                "img5/castle9.png",
+                "img5/castle10.png",
+                "img5/castle11.png",
+                "img5/castle12.png",
+                "img5/castle13.png",
+                "img5/castle14.png",
+                "img5/castle15.png",
+                "img5/castle16.png",
+                "img5/castle17.png",
+                "img5/castle18.png",
+                "img5/castle19.png",
+                "img5/castle20.png",
+                "img5/castle21.png",
+                "img5/castle22.png",
+                "img5/castle23.png",
+                "img5/castle24.png",
+                "img5/castle25.png",
             )
             let $parallax = $(".parallax-background");
             let height = $parallax.height();
             let width = $parallax.width();
-            let region = 5
+            let region = 13
             $("h1").text(`${region}`)
 
             $(window).on('resize', function () {
@@ -66,11 +82,11 @@
                 $("h1").text(`${region}`)
             });
             $parallax.mousemove(function (event) {
-                let horizontalRegion = Math.ceil(event.pageX / width * 3)
-                let verticalRegion = Math.ceil(event.pageY / height * 3)
-                region = horizontalRegion + (3 * (verticalRegion - 1))
+                let horizontalRegion = Math.ceil(event.pageX / width * 5)
+                let verticalRegion = Math.ceil(event.pageY / height * 5)
+                region = horizontalRegion + (5 * (verticalRegion - 1))
                 $("h1").text(`${region}`)
-                $parallax.css("background-image", `url("img/castle${region}.png")`);
+                $parallax.css("background-image", `url("img5/castle${region}.png")`);
             })
         });
 
@@ -78,7 +94,7 @@
 </head>
 <body>
 <div class="parallax-background">
-    <h1>mouse position</h1>
+<!--    <h1>mouse position</h1>-->
 </div>
 </body>
 </html>

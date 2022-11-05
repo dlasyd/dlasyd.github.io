@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .fullScreen {
+            height: 100vh;
+            width: 100vw;
+        }
+    </style>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://superal.github.io/canvas2image/canvas2image.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+
+        // const screenshotTarget = document.body;
+        // html2canvas(screenshotTarget).then(canvas => {
+        //     document.body.appendChild(canvas)
+        //     Canvas2Image.saveAsPNG(canvas);
+        // });
+        // html2canvas(screenshotTarget, {
+        //     onrendered: function (canvas) {
+        //         document.body.appendChild(canvas);
+        //         return Canvas2Image.saveAsPNG(canvas);
+        //     }
+        // });
+        // https://www.google.com/maps/@38.7870981,-9.3889531,143a,35y,292.5h,47.88t/data=!3m1!1e3
+        $(document).ready(function () {
+            $("#cnt").html('<object type="text/html" class="fullScreen" data="https://www.google.com/maps/@38.7870981,-9.3889531,143a,35y,292.5h,47.88t/data=!3m1!1e3" ></object>');
+        })
+    </script>
+</head>
+<body>
+<div id="cnt"></div>
+</body>
+</html>
