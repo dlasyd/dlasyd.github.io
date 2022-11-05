@@ -72,24 +72,6 @@
                 "img5/castle25.png.webp",
             )
             let $parallax = $(".parallax-background");
-            let height = $parallax.height();
-            let width = $parallax.width();
-            let region = 13
-            $("h1").text(`${region}`)
-
-            $(window).on('resize', function () {
-                height = $parallax.height();
-                width = $parallax.width();
-                // update region here
-                $("h1").text(`${region}`)
-            });
-            $parallax.mousemove(function (event) {
-                let horizontalRegion = Math.ceil(event.pageX / width * 5)
-                let verticalRegion = Math.ceil(event.pageY / height * 5)
-                region = horizontalRegion + (5 * (verticalRegion - 1))
-                $("h1").text(`${region}`)
-                $parallax.css("background-image", `url("img5/castle${region}.png.webp")`);
-            })
 
             const maxGamma = 50
             addEventListener('deviceorientation', (event) => {
@@ -99,6 +81,7 @@
                 const region = horizontalRegion + (5 * (verticalRegion - 1))
                 $parallax.css("background-image", `url("img5/castle${region}.png.webp")`);
                 console.log(event)
+                $("h1").text(`${event.gamma}`)
             });
 
         });
