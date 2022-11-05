@@ -84,6 +84,33 @@
                 $("h1").text(`${event.gamma}`)
             });
 
+            // if ( location.protocol != "https:" ) {
+            //     location.href = "https:" + window.location.href.substring( window.location.protocol.length );
+            // }
+            function permission () {
+                if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function" ) {
+                    // (optional) Do something before API request prompt.
+                    DeviceMotionEvent.requestPermission()
+                        .then( response => {
+                            // (optional) Do something after API prompt dismissed.
+                            if ( response === "granted" ) {
+                                window.addEventListener( "devicemotion", (event) => {
+                                    // do something for 'e' here.
+                                    const gamma = Math.min(maxGamma, event.gamma)
+                                    const horizontalRegion = Math.ceil(gamma / maxGamma * 5)
+                                    const verticalRegion = 3
+                                    const region = horizontalRegion + (5 * (verticalRegion - 1))
+                                    $parallax.css("background-image", `url("img5/castle${region}.png.webp")`);
+                                    console.log(event)
+                                    $("h1").text(`${event.gamma}`)
+                                })
+                            }
+                        })
+                        .catch( console.error )
+                } else {
+                }
+            }
+            permission()
         });
 
 
