@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo of concept</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .parallax-background {
+            height: 100vh;
+            width: 100vw;
+            background-image: url("img5/castle13.png.webp");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .parallax-background h1 {
+            color: white;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        /*
+            regions on the screen
+            1 2 3
+            4 5 6
+            7 8 9
+         */
+        $(document).ready(function () {
+            const images = []
+
+            function preload() {
+                for (i = 0; i < preload.arguments.length; i++) {
+                    images[i] = new Image()
+                    images[i].src = preload.arguments[i]
+                }
+            }
+
+            preload(
+                "img5/castle1.png.webp",
+                "img5/castle2.png.webp",
+                "img5/castle3.png.webp",
+                "img5/castle4.png.webp",
+                "img5/castle5.png.webp",
+                "img5/castle6.png.webp",
+                "img5/castle7.png.webp",
+                "img5/castle8.png.webp",
+                "img5/castle9.png.webp",
+                "img5/castle10.png.webp",
+                "img5/castle11.png.webp",
+                "img5/castle12.png.webp",
+                "img5/castle13.png.webp",
+                "img5/castle14.png.webp",
+                "img5/castle15.png.webp",
+                "img5/castle16.png.webp",
+                "img5/castle17.png.webp",
+                "img5/castle18.png.webp",
+                "img5/castle19.png.webp",
+                "img5/castle20.png.webp",
+                "img5/castle21.png.webp",
+                "img5/castle22.png.webp",
+                "img5/castle23.png.webp",
+                "img5/castle24.png.webp",
+                "img5/castle25.png.webp",
+            )
+            let $parallax = $(".parallax-background");
+            let height = $parallax.height();
+            let width = $parallax.width();
+            let region = 13
+            $("h1").text(`${region}`)
+
+            $(window).on('resize', function () {
+                height = $parallax.height();
+                width = $parallax.width();
+                // update region here
+                $("h1").text(`${region}`)
+            });
+            $parallax.mousemove(function (event) {
+                let horizontalRegion = Math.ceil(event.pageX / width * 5)
+                let verticalRegion = Math.ceil(event.pageY / height * 5)
+                region = horizontalRegion + (5 * (verticalRegion - 1))
+                $("h1").text(`${region}`)
+                $parallax.css("background-image", `url("img5/castle${region}.png.webp")`);
+            })
+
+            const maxGamma = 50
+            addEventListener('deviceorientation', (event) => {
+                const gamma = Math.min(maxGamma, event.gamma)
+                const horizontalRegion = Math.ceil(gamma / maxGamma * 5)
+                const verticalRegion = 3
+                const region = horizontalRegion + (5 * (verticalRegion - 1))
+                $parallax.css("background-image", `url("img5/castle${region}.png.webp")`);
+                console.log(event)
+            });
+
+        });
+
+
+    </script>
+</head>
+<body>
+<div class="parallax-background">
+    <h1>mouse position</h1>
+</div>
+</body>
+</html>
