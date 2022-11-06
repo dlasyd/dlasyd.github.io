@@ -49,31 +49,31 @@
             }
 
             preload(
-                "img5/castle1.png.webp",
-                "img5/castle2.png.webp",
-                "img5/castle3.png.webp",
-                "img5/castle4.png.webp",
-                "img5/castle5.png.webp",
-                "img5/castle6.png.webp",
-                "img5/castle7.png.webp",
-                "img5/castle8.png.webp",
-                "img5/castle9.png.webp",
-                "img5/castle10.png.webp",
-                "img5/castle11.png.webp",
-                "img5/castle12.png.webp",
-                "img5/castle13.png.webp",
-                "img5/castle14.png.webp",
-                "img5/castle15.png.webp",
-                "img5/castle16.png.webp",
-                "img5/castle17.png.webp",
-                "img5/castle18.png.webp",
-                "img5/castle19.png.webp",
-                "img5/castle20.png.webp",
-                "img5/castle21.png.webp",
-                "img5/castle22.png.webp",
-                "img5/castle23.png.webp",
-                "img5/castle24.png.webp",
-                "img5/castle25.png.webp",
+                "/img5/castle1.png.webp",
+                "/img5/castle2.png.webp",
+                "/img5/castle3.png.webp",
+                "/img5/castle4.png.webp",
+                "/img5/castle5.png.webp",
+                "/img5/castle6.png.webp",
+                "/img5/castle7.png.webp",
+                "/img5/castle8.png.webp",
+                "/img5/castle9.png.webp",
+                "/img5/castle10.png.webp",
+                "/img5/castle11.png.webp",
+                "/img5/castle12.png.webp",
+                "/img5/castle13.png.webp",
+                "/img5/castle14.png.webp",
+                "/img5/castle15.png.webp",
+                "/img5/castle16.png.webp",
+                "/img5/castle17.png.webp",
+                "/img5/castle18.png.webp",
+                "/img5/castle19.png.webp",
+                "/img5/castle20.png.webp",
+                "/img5/castle21.png.webp",
+                "/img5/castle22.png.webp",
+                "/img5/castle23.png.webp",
+                "/img5/castle24.png.webp",
+                "/img5/castle25.png.webp",
             )
             let $parallax = $(".parallax-background");
 
@@ -83,7 +83,7 @@
                 const horizontalRegion = Math.ceil(gamma / maxGamma * 5)
                 const verticalRegion = 3
                 const region = horizontalRegion + (5 * (verticalRegion - 1))
-                $parallax.css("background-image", `url("img5/castle${region}.png.webp")`);
+                $parallax.css("background-image", `url("/img5/castle${region}.png.webp")`);
                 console.log(event)
                 $("h1").text(`${event.gamma}`)
             });
