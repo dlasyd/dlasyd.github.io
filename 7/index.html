@@ -76,7 +76,7 @@
             let $parallax = $(".parallax-background");
 
             const maxGamma = 35
-            const maxBeta = 10
+            const maxBeta = 20
             const stepGamma = maxGamma * 2 / 5
             const stepBeta = maxBeta * 2 / 5
             const betaOffset = 0
@@ -87,8 +87,8 @@
                 const beta = Math.min(maxBeta, Math.abs(event.beta - betaOffset)) * Math.sign(event.beta - betaOffset)
                 const horizontalRegion = Math.max(1, Math.ceil((maxGamma + gamma) / stepGamma)) // Math.max (1, to avoid 0 when real gamma = -maxGamma
                 const verticalRegion = Math.max(1, Math.ceil((maxBeta + beta) / stepBeta))
-                // const region = horizontalRegion + (5 * (verticalRegion - 1))
-                const region = horizontalRegion + 10
+                const region = horizontalRegion + (5 * (verticalRegion - 1))
+                // const region = horizontalRegion + 10
                 $parallax.css("background-image", `url("/img5/castle${region}.png.webp")`);
                 console.log(event)
                 $("button").text(`${region}`)
