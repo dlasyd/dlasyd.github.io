@@ -73,28 +73,73 @@
             let height = $parallax.height();
             let width = $parallax.width();
             let region = 13
-            $("h1").text(`${region}`)
+            $("button").text(`${region}`)
 
             $(window).on('resize', function () {
                 height = $parallax.height();
                 width = $parallax.width();
                 // update region here
-                $("h1").text(`${region}`)
+                $("button").text(`${region}`)
             });
             $parallax.mousemove(function (event) {
                 let horizontalRegion = Math.ceil(event.pageX / width * 5)
                 let verticalRegion = Math.ceil(event.pageY / height * 5)
                 region = horizontalRegion + (5 * (verticalRegion - 1))
-                $("h1").text(`${region}`)
+                $("button").text(`${region}`)
                 $parallax.css("background-image", `url("img5/castle${region}.png.webp")`);
             })
+
+            const maxGamma = 35
+            const maxBeta = 35
+            const stepGamma = maxGamma * 2 / 5
+            const stepBeta = maxBeta * 2 / 5
+            let betaOffset = null
+            let offsetGamma = null
+            addEventListener('deviceorientation', (event) => {
+                // do something for 'e' here.
+                const gamma = Math.min(maxGamma, Math.abs(event.gamma)) * Math.sign(event.gamma)
+                const horizontalRegion = Math.max(1, Math.ceil((maxGamma + gamma) / stepGamma)) // Math.max (1, to avoid 0 when real gamma = -maxGamma
+
+                // const region = horizontalRegion + 10
+                let verticalRegion = 3
+                if (betaOffset === null) {
+                    betaOffset = event.beta
+                } else {
+                    const beta = Math.min(maxBeta, Math.abs(event.beta - betaOffset)) * Math.sign(event.beta - betaOffset);
+                    verticalRegion = Math.max(1, Math.ceil((maxBeta + beta) / stepBeta))
+                    if (Math.abs(beta) === maxBeta) {
+                        // betaOffset = event.beta - maxBeta
+                    }
+                }
+                const region = horizontalRegion + (5 * (verticalRegion - 1))
+                $parallax.css("background-image", `url("img5/castle${region}.png.webp")`);
+                console.log(event)
+                $("button").text(`${region}`)
+            });
+
+            function permission() {
+                if (typeof (DeviceMotionEvent) !== "undefined" && typeof (DeviceMotionEvent.requestPermission) === "function") {
+                    // (optional) Do something before API request prompt.
+                    DeviceMotionEvent.requestPermission()
+                        .then(response => {
+                            if (response === "granted") {
+                                console.log("granted")
+                            }
+                        })
+                        .catch(console.error)
+                } else {
+                    alert("DeviceMotionEvent is not defined");
+                }
+            }
+
+            $('button').click(permission)
         });
 
     </script>
 </head>
 <body>
 <div class="parallax-background">
-<!--    <h1>mouse position</h1>-->
+    <button>enable motion</button>
 </div>
 </body>
 </html>
