@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo of concept</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .parallax-background {
+            height: 100vh;
+            width: 100vw;
+            background-image: url("img9/castle13.png.webp");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .parallax-background h1 {
+            color: white;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        /*
+            regions on the screen
+            1 2 3
+            4 5 6
+            7 8 9
+         */
+        $(document).ready(function () {
+            const images = []
+
+            function preload() {
+                for (i = 0; i < preload.arguments.length; i++) {
+                    images[i] = new Image()
+                    images[i].src = preload.arguments[i]
+                }
+            }
+            preload(
+                ...[...Array(81).keys()]
+                    .map(i => i + 1)
+                    .map(i => `img9/castle${i}.png.webp`)
+            )
+            const TILES = 9
+            const STARTING_REGION = 41
+            let $parallax = $(".parallax-background");
+            let height = $parallax.height();
+            let width = $parallax.width();
+            let region = STARTING_REGION
+            $("button").text(`${region}`)
+
+            $(window).on('resize', function () {
+                height = $parallax.height();
+                width = $parallax.width();
+                // update region here
+                $("button").text(`${region}`)
+            });
+            $parallax.mousemove(function (event) {
+                let horizontalRegion = Math.ceil(event.pageX / width * TILES)
+                let verticalRegion = Math.ceil(event.pageY / height * TILES)
+                region = horizontalRegion + (TILES * (verticalRegion - 1))
+                $("button").text(`${region}`)
+                $parallax.css("background-image", `url("img9/castle${region}.png.webp")`);
+            })
+
+            const maxGamma = 35
+            const maxBeta = 35
+            const stepGamma = maxGamma * 2 / TILES
+            const stepBeta = maxBeta * 2 / TILES
+            let betaOffset = null
+            let offsetGamma = null
+            addEventListener('deviceorientation', (event) => {
+                // do something for 'e' here.
+                const gamma = Math.min(maxGamma, Math.abs(event.gamma)) * Math.sign(event.gamma)
+                const horizontalRegion = Math.max(1, Math.ceil((maxGamma + gamma) / stepGamma)) // Math.max (1, to avoid 0 when real gamma = -maxGamma
+
+                // const region = horizontalRegion + 10
+                let verticalRegion = STARTING_REGION
+                if (betaOffset === null) {
+                    betaOffset = event.beta
+                } else {
+                    const beta = Math.min(maxBeta, Math.abs(event.beta - betaOffset)) * Math.sign(event.beta - betaOffset);
+                    verticalRegion = Math.max(1, Math.ceil((maxBeta + beta) / stepBeta))
+                    if (Math.abs(beta) === maxBeta) {
+                        // betaOffset = event.beta - maxBeta
+                    }
+                }
+                const region = horizontalRegion + (TILES * (verticalRegion - 1))
+                $parallax.css("background-image", `url("img9/castle${region}.png.webp")`);
+                console.log(event)
+                $("button").text(`${region}`)
+            });
+
+            function permission() {
+                if (typeof (DeviceMotionEvent) !== "undefined" && typeof (DeviceMotionEvent.requestPermission) === "function") {
+                    // (optional) Do something before API request prompt.
+                    DeviceMotionEvent.requestPermission()
+                        .then(response => {
+                            if (response === "granted") {
+                                console.log("granted")
+                            }
+                        })
+                        .catch(console.error)
+                } else {
+                    alert("DeviceMotionEvent is not defined");
+                }
+            }
+
+            $('button').click(permission)
+        });
+
+    </script>
+</head>
+<body>
+<div class="parallax-background">
+    <button>enable motion</button>
+</div>
+</body>
+</html>
