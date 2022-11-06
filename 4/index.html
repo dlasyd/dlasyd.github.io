@@ -7,7 +7,7 @@
         * {
             padding: 0;
             margin: 0;
-            font-size:36px;
+            font-size: 36px;
         }
 
         .parallax-background {
@@ -75,13 +75,17 @@
             )
             let $parallax = $(".parallax-background");
 
-            const maxGamma = 25
-            const step = maxGamma * 2 / 5
+            const maxGamma = 35
+            const maxBeta = 35
+            const stepGamma = maxGamma * 2 / 5
+            const stepBeta = maxBeta * 2 / 5
+            const betaOffset = 90
             addEventListener('deviceorientation', (event) => {
                 // do something for 'e' here.
                 const gamma = Math.min(maxGamma, Math.abs(event.gamma)) * Math.sign(event.gamma)
-                const horizontalRegion = Math.max(1, Math.ceil((maxGamma + gamma)/step)) // Math.max (1, to avoid 0 when real gamma = -maxGamma
-                const verticalRegion = 3
+                const beta = Math.min(maxBeta, Math.abs(event.beta - betaOffset)) * Math.sign(event.beta - betaOffset)
+                const horizontalRegion = Math.max(1, Math.ceil((maxGamma + gamma) / stepGamma)) // Math.max (1, to avoid 0 when real gamma = -maxGamma
+                const verticalRegion = Math.max(1, Math.ceil((maxBeta + beta) / stepBeta))
                 const region = horizontalRegion + (5 * (verticalRegion - 1))
                 $parallax.css("background-image", `url("/img5/castle${region}.png.webp")`);
                 console.log(event)
