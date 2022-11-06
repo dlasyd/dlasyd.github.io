@@ -79,7 +79,8 @@
             const maxBeta = 10
             const stepGamma = maxGamma * 2 / 5
             const stepBeta = maxBeta * 2 / 5
-            const betaOffset = 90
+            const betaOffset = 0
+            let offsetGamma = 0
             addEventListener('deviceorientation', (event) => {
                 // do something for 'e' here.
                 const gamma = Math.min(maxGamma, Math.abs(event.gamma)) * Math.sign(event.gamma)
