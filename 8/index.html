@@ -79,16 +79,25 @@
             const maxBeta = 35
             const stepGamma = maxGamma * 2 / 5
             const stepBeta = maxBeta * 2 / 5
-            const betaOffset = 0
-            let offsetGamma = 0
+            let betaOffset = null
+            let offsetGamma = null
             addEventListener('deviceorientation', (event) => {
                 // do something for 'e' here.
                 const gamma = Math.min(maxGamma, Math.abs(event.gamma)) * Math.sign(event.gamma)
-                const beta = Math.min(maxBeta, Math.abs(event.beta - betaOffset)) * Math.sign(event.beta - betaOffset)
                 const horizontalRegion = Math.max(1, Math.ceil((maxGamma + gamma) / stepGamma)) // Math.max (1, to avoid 0 when real gamma = -maxGamma
-                const verticalRegion = Math.max(1, Math.ceil((maxBeta + beta) / stepBeta))
-                const region = horizontalRegion + (5 * (verticalRegion - 1))
+
                 // const region = horizontalRegion + 10
+                let verticalRegion = 3
+                if (betaOffset === null) {
+                    betaOffset = event.beta
+                } else {
+                    const beta = Math.min(maxBeta, Math.abs(event.beta - betaOffset)) * Math.sign(event.beta - betaOffset);
+                    verticalRegion = Math.max(1, Math.ceil((maxBeta + beta) / stepBeta))
+                    if (Math.abs(beta) === maxBeta) {
+                        // betaOffset = event.beta - maxBeta
+                    }
+                }
+                const region = horizontalRegion + (5 * (verticalRegion - 1))
                 $parallax.css("background-image", `url("/img5/castle${region}.png.webp")`);
                 console.log(event)
                 $("button").text(`${region}`)
