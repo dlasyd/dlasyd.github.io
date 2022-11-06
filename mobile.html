@@ -100,7 +100,7 @@
                             if ( response === "granted" ) {
                                 window.addEventListener( "devicemotion", (event) => {
                                     // do something for 'e' here.
-                                    const gamma = Math.min(maxGamma, event.gamma)
+                                    const gamma = Math.min(maxGamma, Math.abs(event.gamma)) * Math.sign(event.gamma)
                                     const horizontalRegion = Math.ceil(gamma / maxGamma * 5)
                                     const verticalRegion = 3
                                     const region = horizontalRegion + (5 * (verticalRegion - 1))
