@@ -78,15 +78,15 @@
             let $parallax = $(".parallax-background");
 
             const maxGamma = 50
-            addEventListener('deviceorientation', (event) => {
-                const gamma = Math.min(maxGamma, event.gamma)
-                const horizontalRegion = Math.ceil(gamma / maxGamma * 5)
-                const verticalRegion = 3
-                const region = horizontalRegion + (5 * (verticalRegion - 1))
-                $parallax.css("background-image", `url("/img5/castle${region}.png.webp")`);
-                console.log(event)
-                $("h1").text(`${event.gamma}`)
-            });
+            // addEventListener('deviceorientation', (event) => {
+            //     const gamma = Math.min(maxGamma, event.gamma)
+            //     const horizontalRegion = Math.ceil(gamma / maxGamma * 5)
+            //     const verticalRegion = 3
+            //     const region = horizontalRegion + (5 * (verticalRegion - 1))
+            //     $parallax.css("background-image", `url("/img5/castle${region}.png.webp")`);
+            //     console.log(event)
+            //     $("h1").text(`${event.gamma}`)
+            // });
 
             // if ( location.protocol != "https:" ) {
             //     location.href = "https:" + window.location.href.substring( window.location.protocol.length );
