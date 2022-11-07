@@ -55,19 +55,17 @@
             let height = $parallax.height();
             let width = $parallax.width();
             let region = STARTING_REGION
-            $("button").text(`${region}`)
 
             $(window).on('resize', function () {
                 height = $parallax.height();
                 width = $parallax.width();
                 // update region here
-                $("button").text(`${region}`)
             });
             $parallax.mousemove(function (event) {
+                $('button').hide()
                 let horizontalRegion = Math.ceil(event.pageX / width * TILES)
                 let verticalRegion = Math.ceil(event.pageY / height * TILES)
                 region = horizontalRegion + (TILES * (verticalRegion - 1))
-                $("button").text(`${region}`)
                 $parallax.css("background-image", `url("img9/castle${region}.png.webp")`);
             })
 
@@ -78,6 +76,7 @@
             let betaOffset = null
             let offsetGamma = null
             addEventListener('deviceorientation', (event) => {
+                $('button').hide()
                 // do something for 'e' here.
                 const gamma = Math.min(maxGamma, Math.abs(event.gamma)) * Math.sign(event.gamma)
                 const horizontalRegion = Math.max(1, Math.ceil((maxGamma + gamma) / stepGamma)) // Math.max (1, to avoid 0 when real gamma = -maxGamma
@@ -96,7 +95,6 @@
                 const region = horizontalRegion + (TILES * (verticalRegion - 1))
                 $parallax.css("background-image", `url("img9/castle${region}.png.webp")`);
                 console.log(event)
-                $("button").text(`${region}`)
             });
 
             function permission() {
@@ -121,7 +119,7 @@
 </head>
 <body>
 <div class="parallax-background">
-    <button>enable motion</button>
+    <button>Enable motion</button>
 </div>
 </body>
 </html>
