@@ -13,7 +13,7 @@
         .parallax-background {
             height: 100vh;
             width: 100vw;
-            background-image: url("img9/castle41.png.webp");
+            background-image: url("img9x/castle41.png.webp");
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
@@ -45,9 +45,10 @@
                 }
             }
             preload(
-                ...[...Array(81).keys()]
+                ...[...Array(45).keys()]
                     .map(i => i + 1)
-                    .map(i => `img9/castle${i}.png.webp`)
+                    .filter( i => i >=37)
+                    .map(i => `img9x/castle${i}.png.webp`)
             )
             const TILES = 9
             const STARTING_REGION = 41
@@ -65,10 +66,11 @@
             });
             $parallax.mousemove(function (event) {
                 let horizontalRegion = Math.ceil(event.pageX / width * TILES)
-                let verticalRegion = Math.ceil(event.pageY / height * TILES)
+                // let verticalRegion = Math.ceil(event.pageY / height * TILES)
+                let verticalRegion = 5
                 region = horizontalRegion + (TILES * (verticalRegion - 1))
                 $("button").text(`${region}`)
-                $parallax.css("background-image", `url("img9/castle${region}.png.webp")`);
+                $parallax.css("background-image", `url("img9x/castle${region}.png.webp")`);
             })
 
             const maxGamma = 35
@@ -89,12 +91,13 @@
                 } else {
                     const beta = Math.min(maxBeta, Math.abs(event.beta - betaOffset)) * Math.sign(event.beta - betaOffset);
                     verticalRegion = Math.max(1, Math.ceil((maxBeta + beta) / stepBeta))
+                    verticalRegion = 5
                     if (Math.abs(beta) === maxBeta) {
                         // betaOffset = event.beta - maxBeta
                     }
                 }
                 const region = horizontalRegion + (TILES * (verticalRegion - 1))
-                $parallax.css("background-image", `url("img9/castle${region}.png.webp")`);
+                $parallax.css("background-image", `url("img9x/castle${region}.png.webp")`);
                 console.log(event)
                 $("button").text(`${region}`)
             });
