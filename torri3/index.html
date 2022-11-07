@@ -70,13 +70,13 @@
             })
 
             const maxGamma = 20
-            const maxBeta = 25
+            const maxBeta = 10
             const stepGamma = maxGamma * 2 / TILES
             const stepBeta = maxBeta * 2 / TILES
             let betaOffset = null
             let offsetGamma = null
             addEventListener('deviceorientation', (event) => {
-                $('button').hide()
+                // $('button').hide()
                 // do something for 'e' here.
                 const gamma = Math.min(maxGamma, Math.abs(event.gamma)) * Math.sign(event.gamma)
                 const horizontalRegion = Math.max(1, Math.ceil((maxGamma + gamma) / stepGamma)) // Math.max (1, to avoid 0 when real gamma = -maxGamma
