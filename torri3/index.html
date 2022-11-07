@@ -62,7 +62,7 @@
                 // update region here
             });
             $parallax.mousemove(function (event) {
-                $('button').hide()
+                // $('button').hide()
                 let horizontalRegion = Math.ceil(event.pageX / width * TILES)
                 let verticalRegion = Math.ceil(event.pageY / height * TILES)
                 region = horizontalRegion + (TILES * (verticalRegion - 1))
