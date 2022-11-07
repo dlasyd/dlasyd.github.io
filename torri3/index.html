@@ -50,7 +50,7 @@
                     .map(i => `img9/castle${i}.png.webp`)
             )
             const TILES = 9
-            const STARTING_REGION = 41
+            const STARTING_REGION = 5
             let $parallax = $(".parallax-background");
             let height = $parallax.height();
             let width = $parallax.width();
@@ -70,7 +70,7 @@
             })
 
             const maxGamma = 20
-            const maxBeta = 10
+            const maxBeta = 25
             const stepGamma = maxGamma * 2 / TILES
             const stepBeta = maxBeta * 2 / TILES
             let betaOffset = null
@@ -94,7 +94,6 @@
                 }
                 const region = horizontalRegion + (TILES * (verticalRegion - 1))
                 $parallax.css("background-image", `url("img9/castle${region}.png.webp")`);
-                console.log(event)
             });
 
             function permission() {
