@@ -13,12 +13,12 @@
         .parallax-background {
             height: 100vh;
             width: 100vw;
-            background-image: url("img9/castle41.png.webp");
+            background-image: url("img5/castle13.png.webp");
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
             display: flex;
-            align-items: start;
+            align-items: center;
             justify-content: center;
         }
 
@@ -37,7 +37,6 @@
          */
         $(document).ready(function () {
             const images = []
-
             function preload() {
                 for (i = 0; i < preload.arguments.length; i++) {
                     images[i] = new Image()
@@ -45,44 +44,65 @@
                 }
             }
             preload(
-                ...[...Array(81).keys()]
-                    .map(i => i + 1)
-                    .map(i => `img9/castle${i}.png.webp`)
+                "img5/castle1.png.webp",
+                "img5/castle2.png.webp",
+                "img5/castle3.png.webp",
+                "img5/castle4.png.webp",
+                "img5/castle5.png.webp",
+                "img5/castle6.png.webp",
+                "img5/castle7.png.webp",
+                "img5/castle8.png.webp",
+                "img5/castle9.png.webp",
+                "img5/castle10.png.webp",
+                "img5/castle11.png.webp",
+                "img5/castle12.png.webp",
+                "img5/castle13.png.webp",
+                "img5/castle14.png.webp",
+                "img5/castle15.png.webp",
+                "img5/castle16.png.webp",
+                "img5/castle17.png.webp",
+                "img5/castle18.png.webp",
+                "img5/castle19.png.webp",
+                "img5/castle20.png.webp",
+                "img5/castle21.png.webp",
+                "img5/castle22.png.webp",
+                "img5/castle23.png.webp",
+                "img5/castle24.png.webp",
+                "img5/castle25.png.webp",
             )
-            const TILES = 9
-            const STARTING_REGION = 5
             let $parallax = $(".parallax-background");
             let height = $parallax.height();
             let width = $parallax.width();
-            let region = STARTING_REGION
+            let region = 13
+            $("button").text(`${region}`)
 
             $(window).on('resize', function () {
                 height = $parallax.height();
                 width = $parallax.width();
                 // update region here
+                $("button").text(`${region}`)
             });
             $parallax.mousemove(function (event) {
-                // $('button').hide()
-                let horizontalRegion = Math.ceil(event.pageX / width * TILES)
-                let verticalRegion = Math.ceil(event.pageY / height * TILES)
-                region = horizontalRegion + (TILES * (verticalRegion - 1))
-                $parallax.css("background-image", `url("img9/castle${region}.png.webp")`);
+                let horizontalRegion = Math.ceil(event.pageX / width * 5)
+                let verticalRegion = Math.ceil(event.pageY / height * 5)
+                region = horizontalRegion + (5 * (verticalRegion - 1))
+                $("button").text(`${region}`)
+                $parallax.css("background-image", `url("img5/castle${region}.png.webp")`);
             })
 
-            const maxGamma = 20
-            const maxBeta = 10
-            const stepGamma = maxGamma * 2 / TILES
-            const stepBeta = maxBeta * 2 / TILES
+            const maxGamma = 35
+            const maxBeta = 35
+            const stepGamma = maxGamma * 2 / 5
+            const stepBeta = maxBeta * 2 / 5
             let betaOffset = null
             let offsetGamma = null
             addEventListener('deviceorientation', (event) => {
-                // $('button').hide()
                 // do something for 'e' here.
                 const gamma = Math.min(maxGamma, Math.abs(event.gamma)) * Math.sign(event.gamma)
                 const horizontalRegion = Math.max(1, Math.ceil((maxGamma + gamma) / stepGamma)) // Math.max (1, to avoid 0 when real gamma = -maxGamma
 
                 // const region = horizontalRegion + 10
-                let verticalRegion = STARTING_REGION
+                let verticalRegion = 3
                 if (betaOffset === null) {
                     betaOffset = event.beta
                 } else {
@@ -92,8 +112,10 @@
                         // betaOffset = event.beta - maxBeta
                     }
                 }
-                const region = horizontalRegion + (TILES * (verticalRegion - 1))
-                $parallax.css("background-image", `url("img9/castle${region}.png.webp")`);
+                const region = horizontalRegion + (5 * (verticalRegion - 1))
+                $parallax.css("background-image", `url("img5/castle${region}.png.webp")`);
+                console.log(event)
+                $("button").text(`${region}`)
             });
 
             function permission() {
@@ -118,7 +140,7 @@
 </head>
 <body>
 <div class="parallax-background">
-    <button>Enable motion</button>
+    <button>enable motion</button>
 </div>
 </body>
 </html>
